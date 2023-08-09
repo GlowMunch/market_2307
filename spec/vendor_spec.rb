@@ -22,6 +22,18 @@ RSpec.describe "Vendor" do
     expect(@vendor1.check_stock(@item_1)).to eq(55)
     expect(@vendor1.check_stock(@item_2)).to eq(12)
 
-    expect(@vendor1.inventory).to eq({"Peach"=>55, "Tomato"=>12})
+    expect(@vendor1.inventory).to eq({@item_1 => 55, @item_2 => 12})
+  end
+
+
+  it "can calculate revenue" do
+    @vendor1.stock(@item_1, 35)
+    @vendor1.stock(@item_2, 7)
+    @vendor2.stock(@item_4, 50)
+    @vendor2.stock(@item_3, 25)
+    @vendor3.stock(@item_1, 65)
+    expect(@vendor1.potential_revenue).to eq(29.75)
+    expect(@vendor2.potential_revenue).to eq(345.00)
+    expect(@vendor3.potential_revenue).to eq(48.75)
   end
 end

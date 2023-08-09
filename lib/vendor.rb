@@ -8,18 +8,24 @@ class Vendor
   end
 
   def check_stock(item)
-    if @inventory[item.name] == nil
+    if @inventory[item] == nil
       0
     else
-      @inventory[item.name]
+      @inventory[item]
     end
   end
 
-  def stock(item, count)
-    if @inventory[item.name] == nil
-      @inventory[item.name] = count
+  def stock(item, ammount)
+    if @inventory[item] == nil
+      @inventory[item] = ammount
     else
-      @inventory[item.name] += count
+      @inventory[item] += ammount
     end
+  end
+
+  def potential_revenue
+    @inventory.map do |revenue|
+      revenue[0].price * revenue[1]
+    end.sum
   end
 end
